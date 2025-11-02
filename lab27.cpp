@@ -125,3 +125,85 @@ void delete_villager() {
         cout << "Villager \"" << name << "\" not found.\n";
     }
 }
+
+// Increase friendship level by 1 (max 10)
+void increase_friendship() {
+    if (villagers.empty()) {
+        cout << "\nNo villagers to update.\n";
+        return;
+    }
+    
+    cout << "\nEnter villager name: ";
+    string name;
+    cin >> name;
+    
+    auto it = villagers.find(name);
+    if (it != villagers.end()) {
+        int friendship = get<0>(it->second);
+        string species = get<1>(it->second);
+        string catchphrase = get<2>(it->second);
+        
+        // Increase friendship, max 10
+        if (friendship < 10) {
+            friendship++;
+        }
+        
+        villagers[name] = make_tuple(friendship, species, catchphrase);
+        cout << name << "'s friendship increased to " << friendship << ".\n";
+    } else {
+        cout << "Villager \"" << name << "\" not found.\n";
+    }
+}
+
+// Decrease friendship level by 1 (min 0)
+void decrease_friendship() {
+    if (villagers.empty()) {
+        cout << "\nNo villagers to update.\n";
+        return;
+    }
+    
+    cout << "\nEnter villager name: ";
+    string name;
+    cin >> name;
+    
+    auto it = villagers.find(name);
+    if (it != villagers.end()) {
+        int friendship = get<0>(it->second);
+        string species = get<1>(it->second);
+        string catchphrase = get<2>(it->second);
+        
+        // Decrease friendship, min 0 (never negative)
+        if (friendship > 0) {
+            friendship--;
+        }
+        
+        villagers[name] = make_tuple(friendship, species, catchphrase);
+        cout << name << "'s friendship decreased to " << friendship << ".\n";
+    } else {
+        cout << "Villager \"" << name << "\" not found.\n";
+    }
+}
+
+// Search for a villager and display their information
+void search_villager() {
+    if (villagers.empty()) {
+        cout << "\nNo villagers to search.\n";
+        return;
+    }
+    
+    cout << "\nEnter villager name to search: ";
+    string name;
+    cin >> name;
+    
+    auto it = villagers.find(name);
+    if (it != villagers.end()) {
+        int friendship = get<0>(it->second);
+        string species = get<1>(it->second);
+        string catchphrase = get<2>(it->second);
+        
+        cout << "\nFound: " << name << " [" << friendship << ", " 
+             << species << ", " << catchphrase << "]\n";
+    } else {
+        cout << "Villager \"" << name << "\" not found.\n";
+    }
+}
