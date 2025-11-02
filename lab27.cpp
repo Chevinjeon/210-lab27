@@ -26,3 +26,37 @@ int main() {
     villagers["Raymond"] = make_tuple(8, "Cat", "Nice fit");
     
     bool again = true;
+    
+    while (again) {
+        int choice = main_menu();
+        switch(choice) {
+            case 1:
+                add_villager();
+                break;
+            case 2:
+                delete_villager();
+                break;
+            case 3:
+                increase_friendship();
+                break;
+            case 4:
+                decrease_friendship();
+                break;
+            case 5:
+                search_villager();
+                break;
+            case 6:
+                again = false;
+                cout << "\nGoodbye!\n";
+                break;
+            default:
+                cout << "Invalid choice.\n";
+        }
+        
+        if (again && choice != 5 && choice != 6) {
+            display_villagers();
+        }
+    }
+    
+    return 0;
+}
