@@ -60,3 +60,30 @@ int main() {
     
     return 0;
 }
+
+// Display main menu and get user choice
+int main_menu() {
+    cout << "\n=== Villager Manager ===\n";
+    cout << "[1] Add Villager\n";
+    cout << "[2] Delete Villager\n";
+    cout << "[3] Increase Friendship\n";
+    cout << "[4] Decrease Friendship\n";
+    cout << "[5] Search for Villager\n";
+    cout << "[6] Exit\n";
+    cout << "Enter choice: ";
+    int choice;
+    cin >> choice;
+    return choice;
+}
+
+// Display all villagers in the map
+void display_villagers() {
+    cout << "\nVillager details:\n";
+    for (const auto& pair : villagers) {
+        int friendship = get<0>(pair.second);
+        string species = get<1>(pair.second);
+        string catchphrase = get<2>(pair.second);
+        cout << pair.first << " [" << friendship << ", " << species 
+             << ", " << catchphrase << "]\n";
+    }
+}
