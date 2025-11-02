@@ -87,3 +87,41 @@ void display_villagers() {
              << ", " << catchphrase << "]\n";
     }
 }
+
+// Add a new villager
+void add_villager() {
+    string name, species, catchphrase;
+    int friendship;
+    
+    cout << "\nVillager name: ";
+    cin >> name;
+    cout << "Friendship level: ";
+    cin >> friendship;
+    cin.ignore(); // Clear newline from buffer
+    cout << "Species: ";
+    getline(cin, species);
+    cout << "Catchphrase: ";
+    getline(cin, catchphrase);
+    
+    villagers[name] = make_tuple(friendship, species, catchphrase);
+    cout << name << " added.\n";
+}
+
+// Delete a villager
+void delete_villager() {
+    if (villagers.empty()) {
+        cout << "\nNo villagers to delete.\n";
+        return;
+    }
+    
+    cout << "\nEnter villager name to delete: ";
+    string name;
+    cin >> name;
+    
+    if (villagers.find(name) != villagers.end()) {
+        villagers.erase(name);
+        cout << name << " deleted.\n";
+    } else {
+        cout << "Villager \"" << name << "\" not found.\n";
+    }
+}
